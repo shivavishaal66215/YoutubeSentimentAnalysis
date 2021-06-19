@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 
+const stripVideoId = (url) => {
+	var regExp =
+		/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+	var match = url.match(regExp);
+	return match && match[7].length === 11 ? match[7] : false;
+};
+
 export default class Input extends Component {
 	constructor(props) {
 		super(props);
@@ -19,11 +26,15 @@ export default class Input extends Component {
 	}
 
 	handleClick(e) {
-		this.props.update(this.state.link);
-
-		this.setState(() => {
-			return { ...this.state, link: "" };
-		});
+		let videoId = stripVideoId(this.state.link);
+		if (videoId !== false) {
+			this.props.update(videoId, true);
+			this.setState(() => {
+				return { ...this.state, link: "" };
+			});
+		} else {
+			this.props.errorUpdate(true);
+		}
 	}
 
 	render() {
