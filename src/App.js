@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Input from "./Input";
+import Response from "./Response";
+export default class App extends Component {
+	constructor(props) {
+		super(props);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+		this.state = {
+			link: "",
+			result: "",
+		};
+
+		this.updateLink = this.updateLink.bind(this);
+	}
+
+	updateLink(e) {
+		this.setState(() => {
+			return { ...this.state, link: e };
+		});
+	}
+
+	render() {
+		return (
+			<div>
+				<Input update={this.updateLink} />
+				<Response />
+			</div>
+		);
+	}
 }
-
-export default App;
