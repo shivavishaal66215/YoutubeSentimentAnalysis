@@ -1,0 +1,44 @@
+.Input {
+	padding-top: 10%;
+}
+
+.Input-overallcontainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem;
+	position: relative;
+}
+
+.Input-searchbox {
+	width: 80%;
+	margin-right: 1rem;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	border: 2px solid black;
+	border-radius: 4rem;
+}
+
+#Input-searchiconlabel {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#Input-input {
+	font-size: 3rem;
+	margin-right: 1rem;
+	width: 100%;
+	outline: none;
+	border: 0px;
+}
+
+#Input-input:focus {
+	outline: none;
+}
+
+#Input-buttondiv {
+	display: inline-block;
+}

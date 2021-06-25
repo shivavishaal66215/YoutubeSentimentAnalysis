@@ -5,7 +5,9 @@ export default class Response extends Component {
 		return (
 			<div>
 				{this.props.error ? <div>Error</div> : null}
-				<div>Score: {this.props.result}</div>
+				{this.props.score !== null ? (
+					<div>Score: {this.props.score}</div>
+				) : null}
 			</div>
 		);
 	}

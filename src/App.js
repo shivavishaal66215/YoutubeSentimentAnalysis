@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Input from "./Input";
 import Response from "./Response";
-
 import Sentiment from "sentiment";
 import axios from "axios";
+import "./css/App.css";
 
 //API key: AIzaSyDsoPiFEsV3GhfDhvvMZLHndon7-KkjhwA
 
@@ -37,7 +37,7 @@ export default class App extends Component {
 
 		this.state = {
 			videoId: "",
-			result: "",
+			result: null,
 			displayError: false,
 		};
 
@@ -91,11 +91,11 @@ export default class App extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="App">
 				<Input update={this.updateLink} errorUpdate={this.updateError} />
 				<Response
 					videoId={this.state.videoId}
-					score={this.props.result}
+					score={this.state.result}
 					error={this.state.displayError}
 				/>
 			</div>
