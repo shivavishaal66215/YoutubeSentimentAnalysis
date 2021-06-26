@@ -1,5 +1,5 @@
 .Input {
-	padding-top: 10%;
+	width: 100%;
 }
 
 .Input-overallcontainer {
@@ -8,6 +8,7 @@
 	align-items: center;
 	padding: 2rem;
 	position: relative;
+	width: 100%;
 }
 
 .Input-searchbox {

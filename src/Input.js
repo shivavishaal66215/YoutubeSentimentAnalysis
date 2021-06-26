@@ -29,14 +29,8 @@ export default class Input extends Component {
 		let videoId = stripVideoId(this.state.link);
 		if (videoId !== false) {
 			this.props.update(videoId, true);
-			this.setState(() => {
-				return { ...this.state, link: "" };
-			});
 		} else {
 			this.props.errorUpdate(true);
-			this.setState(() => {
-				return { ...this.state, link: "" };
-			});
 		}
 	}
 

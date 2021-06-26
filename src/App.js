@@ -15,6 +15,14 @@ const calcMultiplier = (val) => {
 	return x;
 };
 
+const adjustedScore = (score) => {
+	let result;
+
+	result = Math.floor(score * 100);
+
+	return result;
+};
+
 const calcCumulativeScore = (arr) => {
 	let i;
 	let curComment, curLikeCount;
@@ -68,6 +76,7 @@ export default class App extends Component {
 
 						//console.log(res.data.items);
 						let score = calcCumulativeScore(res.data.items);
+						score = adjustedScore(score);
 						this.setState(() => {
 							return { ...this.state, result: score };
 						});
