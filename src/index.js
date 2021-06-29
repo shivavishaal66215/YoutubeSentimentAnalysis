@@ -2,14 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Page from "./Page";
 
-//Bounds for the sentiment api values:
-//Max: 5
-//Min: -5
-
-//Bounds of this App results:
-//Max: 500
-//Min: -500
-
 //Supported youtube Link formats
 /* http://www.youtube.com/watch?v=0zM3nApSvMg&feature=feedrec_grec_index
 http://www.youtube.com/user/IngridMichaelsonVEVO#p/a/u/1/QdK8U-VIH_o

@@ -120,7 +120,7 @@ export default class Page extends Component {
 					this.state.displayError ? (
 						<img src={img3} alt="img3" />
 					) : (
-						<Doughnut data={data} animateScale={true} />
+						<Doughnut data={data} />
 					)}
 				</div>
 			</div>

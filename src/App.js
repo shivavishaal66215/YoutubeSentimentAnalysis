@@ -5,7 +5,7 @@ import Sentiment from "sentiment";
 import axios from "axios";
 import "./css/App.css";
 
-//API key: AIzaSyDsoPiFEsV3GhfDhvvMZLHndon7-KkjhwA
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const calcCumulativeScore = (arr) => {
 	let i;
@@ -63,7 +63,7 @@ export default class App extends Component {
 						part: "snippet",
 						maxResults: 100,
 						videoId: this.state.videoId,
-						key: "AIzaSyDsoPiFEsV3GhfDhvvMZLHndon7-KkjhwA",
+						key: API_KEY,
 					};
 
 					try {
