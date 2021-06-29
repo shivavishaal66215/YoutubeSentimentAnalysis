@@ -6,20 +6,19 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 2rem;
 	position: relative;
 	width: 100%;
 }
 
 .Input-searchbox {
-	width: 80%;
-	margin-right: 1rem;
+	width: 100%;
+	margin-right: 0.7vw;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	border: 2px solid black;
-	border-radius: 4rem;
+	border: 1px solid black;
+	border-radius: 2.8vw;
 }
 
 #Input-searchiconlabel {
@@ -29,8 +28,8 @@
 }
 
 #Input-input {
-	font-size: 3rem;
-	margin-right: 1rem;
+	font-size: 2.1vw;
+	margin-right: 0.7vw;
 	width: 100%;
 	outline: none;
 	border: 0px;

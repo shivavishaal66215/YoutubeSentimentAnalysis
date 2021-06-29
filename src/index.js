@@ -1,6 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import Page from "./Page";
+
+//Bounds for the sentiment api values:
+//Max: 5
+//Min: -5
+
+//Bounds of this App results:
+//Max: 500
+//Min: -500
 
 //Supported youtube Link formats
 /* http://www.youtube.com/watch?v=0zM3nApSvMg&feature=feedrec_grec_index
@@ -11,4 +19,4 @@ http://www.youtube.com/embed/0zM3nApSvMg?rel=0
 http://www.youtube.com/watch?v=0zM3nApSvMg
 http://youtu.be/0zM3nApSvMg */
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Page />, document.getElementById("root"));

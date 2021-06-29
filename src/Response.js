@@ -1,46 +1,39 @@
 import React, { Component } from "react";
 import "./css/Response.css";
+import good from "./images/good.svg";
+import bad from "./images/bad.svg";
+import search from "./images/search.svg";
+import error from "./images/error.svg";
 
 export default class Response extends Component {
-	constructor(props) {
-		super(props);
-	}
-
-	errorDiv() {
-		return (
-			<div className="Response-ErrorDiv">
-				<div className="Response-Outerring">
-					<div className="Response-Middlering">
-						<div className="Response-Innerring">Error</div>
-					</div>
-				</div>
-				<div className="Response-ErrorMessage">
-					There was some error fetching comments. Please check if you have
-					pasted the correct link
-				</div>
-			</div>
-		);
-	}
-
-	resultDiv() {
-		return (
-			<div className="Response-ErrorDiv">
-				<div className="Response-Outerring">
-					<div className="Response-Middlering">
-						<div className="Response-Innerring">{this.props.score}</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
-
 	render() {
+		let res;
+		let msg;
+		if (this.props.error) {
+			res = error;
+			msg = "There was some error. Are you sure you entered the correct url?";
+		} else if (
+			this.props.num_positive === this.props.num_negative &&
+			this.props.num_positive === 0
+		) {
+			res = search;
+			msg = "Go on! Try the app!";
+		} else if (this.props.num_positive >= this.props.num_negative) {
+			res = good;
+			msg =
+				"The comments are looking awesome! Keep doing whatever you are doing!";
+		} else if (this.props.num_negative > this.props.num_positive) {
+			res = bad;
+			msg = "Okay, listen up. You might wanna change things up a bit.";
+		}
 		return (
 			<div className="Response">
-				{this.props.error ? this.errorDiv() : null}
-				{this.props.score !== null && this.props.error != true
-					? this.resultDiv()
-					: null}
+				<div className="Response-left">
+					<img src={res} alt="response" />
+				</div>
+				<div className="Response-right">
+					<div className="Response-content">{msg}</div>
+				</div>
 			</div>
 		);
 	}

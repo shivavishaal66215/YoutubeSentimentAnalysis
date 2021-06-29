@@ -7,36 +7,31 @@ import "./css/App.css";
 
 //API key: AIzaSyDsoPiFEsV3GhfDhvvMZLHndon7-KkjhwA
 
-const calcMultiplier = (val) => {
-	let x = Math.pow(Math.E, -1 * val);
-	x += 1;
-	x = 1 / x;
-
-	return x;
-};
-
-const adjustedScore = (score) => {
-	let result;
-
-	result = Math.floor(score * 100);
-
-	return result;
-};
-
 const calcCumulativeScore = (arr) => {
 	let i;
-	let curComment, curLikeCount;
-
+	let curComment;
+	let num_positive = 0;
+	let num_negative = 0;
 	const sentiment = new Sentiment();
 	let result = sentiment.analyze(curComment);
 	let curScore = 0;
 	for (i = 0; i < arr.length; i++) {
 		curComment = arr[i].snippet.topLevelComment.snippet.textDisplay;
-		curLikeCount = arr[i].snippet.topLevelComment.snippet.likeCount;
 		result = sentiment.analyze(curComment);
-		curScore += result.score * calcMultiplier(curLikeCount);
+		if (result.score < 0) {
+			num_negative++;
+		} else {
+			num_positive++;
+		}
+		curScore += result.score;
 	}
-	return curScore / arr.length;
+	//console.log(num_positive, num_negative, arr.length);
+	let nums = {
+		np: num_positive,
+		nn: num_negative,
+		curScore: curScore,
+	};
+	return nums;
 };
 
 export default class App extends Component {
@@ -46,6 +41,8 @@ export default class App extends Component {
 		this.state = {
 			videoId: "",
 			result: null,
+			num_positive: 0,
+			num_negative: 0,
 			displayError: false,
 		};
 
@@ -57,6 +54,7 @@ export default class App extends Component {
 		if (val) {
 			this.setState(
 				() => {
+					this.props.setDisplayError(false);
 					return { ...this.state, videoId: e, displayError: false };
 				},
 				async () => {
@@ -76,16 +74,32 @@ export default class App extends Component {
 
 						//console.log(res.data.items);
 						let score = calcCumulativeScore(res.data.items);
-						score = adjustedScore(score);
-						this.setState(() => {
-							return { ...this.state, result: score };
-						});
-						console.log(score);
+						this.setState(
+							() => {
+								return {
+									...this.state,
+									result: score,
+									num_negative: score.nn,
+									num_positive: score.np,
+								};
+							},
+							() => {
+								this.props.setter(
+									this.state.num_positive,
+									this.state.num_negative
+								);
+							}
+						);
 					} catch (err) {
-						console.log(err);
-						this.setState(() => {
-							return { ...this.state, displayError: true };
-						});
+						//console.log(err);
+						this.setState(
+							() => {
+								return { ...this.state, displayError: true };
+							},
+							() => {
+								this.props.setDisplayError(true);
+							}
+						);
 					}
 				}
 			);
@@ -93,9 +107,14 @@ export default class App extends Component {
 	}
 
 	updateError(val) {
-		this.setState(() => {
-			return { ...this.state, displayError: val };
-		});
+		this.setState(
+			() => {
+				return { ...this.state, displayError: val };
+			},
+			() => {
+				this.props.setDisplayError(val);
+			}
+		);
 	}
 
 	render() {
@@ -104,9 +123,11 @@ export default class App extends Component {
 				<Input update={this.updateLink} errorUpdate={this.updateError} />
 				<Response
 					videoId={this.state.videoId}
-					score={this.state.result}
+					num_negative={this.state.num_negative}
+					num_positive={this.state.num_positive}
 					error={this.state.displayError}
 				/>
+				;
 			</div>
 		);
 	}

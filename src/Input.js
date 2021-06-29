@@ -17,6 +17,7 @@ export default class Input extends Component {
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleClick = this.handleClick.bind(this);
+		this.handleKeyDown = this.handleKeyDown.bind(this);
 	}
 
 	handleChange(e) {
@@ -34,13 +35,34 @@ export default class Input extends Component {
 		}
 	}
 
+	handleKeyDown(e) {
+		if (e.key === "Enter") {
+			//console.log("Enter pressed");
+			let videoId = stripVideoId(this.state.link);
+			if (videoId !== false) {
+				this.props.update(videoId, true);
+			} else {
+				this.props.errorUpdate(true);
+			}
+		}
+	}
+
 	render() {
 		return (
 			<div className="Input">
 				<div className="Input-overallcontainer">
 					<div className="Input-searchbox">
-						<label id="Input-searchiconlabel" htmlFor="input-container">
-							<svg width="5rem" height="5rem" viewBox="0 0 32 32" version="1.1">
+						<label
+							style={{ cursor: "pointer" }}
+							id="Input-searchiconlabel"
+							htmlFor="Input-input"
+						>
+							<svg
+								width="3.5vw"
+								height="3.5vw"
+								viewBox="0 0 32 32"
+								version="1.1"
+							>
 								<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 									<g id="icon-111-search" fill="#000000">
 										<path d="M19.4271164,20.4271164 C18.0372495,21.4174803 16.3366522,22 14.5,22 C9.80557939,22 6,18.1944206 6,13.5 C6,8.80557939 9.80557939,5 14.5,5 C19.1944206,5 23,8.80557939 23,13.5 C23,15.8472103 22.0486052,17.9722103 20.5104077,19.5104077 L26.5077736,25.5077736 C26.782828,25.782828 26.7761424,26.2238576 26.5,26.5 C26.2219324,26.7780676 25.7796227,26.7796227 25.5077736,26.5077736 L19.4271164,20.4271164 L19.4271164,20.4271164 Z M14.5,21 C18.6421358,21 22,17.6421358 22,13.5 C22,9.35786417 18.6421358,6 14.5,6 C10.3578642,6 7,9.35786417 7,13.5 C7,17.6421358 10.3578642,21 14.5,21 L14.5,21 Z"></path>
@@ -54,12 +76,17 @@ export default class Input extends Component {
 							onChange={this.handleChange}
 							value={this.state.link}
 							id="Input-input"
+							onKeyPress={this.handleKeyDown}
 						/>
 					</div>
-					<div id="Input-buttondiv" onClick={this.handleClick}>
+					<div
+						style={{ cursor: "pointer" }}
+						id="Input-buttondiv"
+						onClick={this.handleClick}
+					>
 						<svg
-							height="4rem"
-							width="4rem"
+							height="2.8vw"
+							width="2.8vw"
 							viewBox="-18 -18 572 572"
 							xmlns="http://www.w3.org/2000/svg"
 						>
