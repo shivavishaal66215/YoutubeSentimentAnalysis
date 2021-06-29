@@ -102,14 +102,13 @@ export default class Page extends Component {
 				{
 					label: "Result",
 					data: [this.state.num_positive, this.state.num_negative],
-					backgroundColor: [
-						"rgb(255, 99, 132)",
-						"rgb(54, 162, 235)",
-						"rgb(255, 205, 86)",
-					],
+					backgroundColor: ["rgb(58,210,158)", "rgb(107,97,254)"],
 					hoverOffset: 10,
 				},
 			],
+			options: {
+				legend: { reverse: true },
+			},
 		};
 		return (
 			<div ref={this.myRef2} className="Page-fulltile Page-third-tile">
@@ -121,7 +120,7 @@ export default class Page extends Component {
 					this.state.displayError ? (
 						<img src={img3} alt="img3" />
 					) : (
-						<Doughnut data={data} />
+						<Doughnut data={data} animateScale={true} />
 					)}
 				</div>
 			</div>
