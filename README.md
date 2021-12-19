@@ -14,3 +14,5 @@ So to help, this app analyses a youtube video and provides the number of postive
 ## Limitations
 1. Since this app uses classic sentiment analysis, sarcasm is not handled very well.
 2. The app is limited to English for now.
+
+Link to test out app: http://youtube-sentiment-react.herokuapp.com/
